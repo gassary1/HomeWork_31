@@ -11,26 +11,32 @@ namespace HomeWork_31
         }
     }
 
-    class Player
+    class Player:Person
     {
-        private string _name;
-        private int _gold;
+        public Player(string name, int gold) : base(name, gold)
+        {
 
-        public string Name => _name;
-        public int Gold => _gold;
+        }
     }
 
-    class Seller
+    class Seller:Person
     {
-        private string _name;
-        private int _gold;
-        private List<Product> _products;
+        public Seller(string name, int gold) : base(name, gold)
+        {
 
-        public string Name => _name;
-        public int Gold => _gold;
+        }
+        public bool SellProduct()
+        {
+
+        }
+
+        private bool GetProduct(out Item product)
+        {
+
+        }
     }
 
-    class Product
+    class Item
     {
         private string _name;
         private int _amount;
@@ -40,11 +46,40 @@ namespace HomeWork_31
         public int Amount => _amount;
         public int Price => _price;
 
-        public Product(string name, int amount, int price)
+        public Item(string name, int amount, int price)
         {
             _name = name;
             _amount = amount;
             _price = price;
+        }
+
+        public void ShowItemInfo()
+        {
+            Console.WriteLine($"{Name,10} {Amount,5} {Price,5}");
+        }
+    }
+
+    abstract class Person
+    {
+        protected string _name;
+        protected int _gold;
+        protected List<Item> _items;
+
+        public string Name => _name;
+        public int Gold => _gold;
+
+        public Person(string name, int gold)
+        {
+            _name = name;
+            _gold = gold;
+        }
+
+        protected void ShowItems()
+        {
+            foreach (Item item in _items)
+            {
+                item.ShowItemInfo();
+            }
         }
     }
 }
