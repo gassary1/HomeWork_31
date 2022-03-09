@@ -1,42 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HomeWork_31.Message_decorator;
 
-namespace HomeWork_31
+namespace HomeWork_31.Base_classes
 {
     class Seller : Person
     {
-        private static List<Item> _products;
         private Player _player;
 
         public Seller(string name, int gold) : base(name, gold)
         {
 
         }
-        public bool SellProduct()
+        public override void SellItem()
         {
-            if (TryGetProduct(out Item product))
+        }
+
+        public override void ShowItems()
+        {
+            foreach (Item item in _items)
             {
-                if (product.Amount > 0)
-                {
-                    
-                }
+                item.ShowItemInfo();
             }
         }
 
-        private bool TryGetProduct(int currentPosition, out Item product)
+        private bool TryGetProduct(int currentPosition, out Item item)
         {
             int itemPosition = currentPosition - 1;
-            product = null;
+            item = null;
 
-            if (_products[itemPosition] == null)
+            if (_items[itemPosition] == null)
             {
                 return false;
             }
 
-            product = _products[itemPosition];
+            item = _items[itemPosition];
             return true;
         }
     }

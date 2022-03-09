@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HomeWork_31.Message_decorator;
 
-namespace HomeWork_31
+namespace HomeWork_31.Base_classes
 {
     class Player : Person
     {
@@ -12,10 +10,20 @@ namespace HomeWork_31
 
         private void AddItem(Item item)
         {
-            if (_items.Contains(item.Name))
-            {
 
+        }
+
+        public override void ShowItems()
+        {
+            foreach(var item in _items)
+            {
+                item.ShowItemInfo();
             }
+        }
+
+        public override void SellItem()
+        {
+            throw new NotImplementedException();
         }
     }
 }

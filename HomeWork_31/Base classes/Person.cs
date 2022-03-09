@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HomeWork_31.Message_decorator;
 
-namespace HomeWork_31
+namespace HomeWork_31.Base_classes
 {
     abstract class Person
     {
