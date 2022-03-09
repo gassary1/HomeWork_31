@@ -12,12 +12,18 @@ namespace HomeWork_31.Base_classes
         {
 
         }
-        public override void SellItem()
+        public void SellItemToPlayer(Player player)
         {
+            if(TryGetProduct(out Item item))
+            {
+                item.Amount--;
+            }
         }
 
         public override void ShowItems()
         {
+            Console.WriteLine($"Лавка продавца - {_name}");
+
             foreach (Item item in _items)
             {
                 item.ShowItemInfo();

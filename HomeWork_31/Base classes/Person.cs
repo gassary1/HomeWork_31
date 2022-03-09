@@ -20,6 +20,5 @@ namespace HomeWork_31.Base_classes
         }
 
         public abstract void ShowItems();
-        public abstract void SellItem();
     }
 }

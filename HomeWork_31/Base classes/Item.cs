@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using HomeWork_31.Message_decorator;
 
 namespace HomeWork_31.Base_classes
 {
@@ -11,7 +10,7 @@ namespace HomeWork_31.Base_classes
         private int _price;
 
         public string Name => _name;
-        public int Amount => _amount;
+        public int Amount { get { return _amount; } private set { _amount = value; } }
         public int Price => _price;
 
         public Item(string name, int amount, int price)
