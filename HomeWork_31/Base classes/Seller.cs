@@ -4,27 +4,52 @@ using HomeWork_31.Message_decorator;
 
 namespace HomeWork_31.Base_classes
 {
-    class Seller : Person
+    class Seller
     {
-        private Player _player;
+        private string _name;
+        private int _gold;
+        private List<Item> _items;
 
-        public Seller(string name, int gold) : base(name, gold)
+        public string Name => _name;
+        public int Gold => _gold;
+
+        public Seller(string name, int gold)
         {
+            _name = name;
+            _gold = gold;
+            _items = new List<Item>();
+            _items.Add(new Item("11", 2, 10));
+            _items.Add(new Item("14", 2, 15));
+            _items.Add(new Item("16", 5, 4));
 
         }
-        public void SellItemToPlayer(Player player)
+        public void SellItemToPlayer(Player player, int currentPosition)
         {
-            if(TryGetProduct(out Item item))
+            Item salledItem;
+
+            if (TryGetProduct(currentPosition, out Item item))
             {
-                item.Amount--;
+                salledItem = (Item)item.Clone();
+                salledItem.Amount = 1;
+
+                _gold += salledItem.Price;
+                _items[currentPosition-1].Amount--;
+
+                player.AddItem(salledItem);
+
+                if (_items[currentPosition-1].Amount==0)
+                {
+                    _items.Remove(item);
+                }
+                item = salledItem;
             }
         }
 
-        public override void ShowItems()
+        public void ShowItems()
         {
-            Console.WriteLine($"Лавка продавца - {_name}");
+            Console.WriteLine($"Лавка продавца {Name}. Баланс - {Gold}");
 
-            foreach (Item item in _items)
+            foreach (var item in _items)
             {
                 item.ShowItemInfo();
             }

@@ -8,8 +8,70 @@ namespace HomeWork_31
     {
         static void Main(string[] Args)
         {
-            Person player = new Player("fdsfs", 1000);
-            Person person = new Seller("Апу", 99999);
+            Player player = new Player("xxx", 231);
+            Seller seller = new Seller("qqq", 1111);
+
+            seller.ShowItems();
+            Console.WriteLine();
+            player.ShowInventory();
+
+
+            seller.SellItemToPlayer(player, 3);
+
+            Console.WriteLine();
+            seller.ShowItems();
+            Console.WriteLine();
+            player.ShowInventory();
+            Console.WriteLine();
+
+            seller.SellItemToPlayer(player, 3);
+
+            Console.WriteLine();
+            seller.ShowItems();
+            Console.WriteLine();
+            player.ShowInventory();
+            Console.WriteLine();
+
+            seller.SellItemToPlayer(player, 3);
+
+            Console.WriteLine();
+            seller.ShowItems();
+            Console.WriteLine();
+            player.ShowInventory();
+            Console.WriteLine();
+
+            seller.SellItemToPlayer(player, 3);
+
+            Console.WriteLine();
+            seller.ShowItems();
+            Console.WriteLine();
+            player.ShowInventory();
+            Console.WriteLine();
+
+            seller.SellItemToPlayer(player, 3);
+
+            Console.WriteLine();
+            seller.ShowItems();
+            Console.WriteLine();
+            player.ShowInventory();
+            Console.WriteLine();
+
+            seller.SellItemToPlayer(player, 1);
+
+            Console.WriteLine();
+            seller.ShowItems();
+            Console.WriteLine();
+            player.ShowInventory();
+            Console.WriteLine();
+
+            seller.SellItemToPlayer(player, 1);
+
+            Console.WriteLine();
+            seller.ShowItems();
+            Console.WriteLine();
+            player.ShowInventory();
+            Console.WriteLine();
+
         }
     }
 }
