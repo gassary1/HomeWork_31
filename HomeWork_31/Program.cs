@@ -8,7 +8,7 @@ namespace HomeWork_31
     {
         static void Main(string[] Args)
         {
-            Player player = new Player("xxx", 231);
+            Player player = new Player("xxx", 10);
             Seller seller = new Seller("qqq", 1111);
 
             seller.ShowItems();

@@ -23,15 +23,8 @@ namespace HomeWork_31.Base_classes
 
         public void AddItem(Item item)
         {
-            if (!CheckItem(item))
-            {
-                _inventory.Add(item);
-            }
-            else
-            {
-
-                Console.WriteLine(">");
-            }
+            _inventory.Add(item);
+            _gold -= item.Price;
 
             for (int i = 1; i < _inventory.Count; i++)
             {
@@ -46,8 +39,6 @@ namespace HomeWork_31.Base_classes
                     }
                 }
             }
-
-            _gold -= item.Price;
         }
 
         public void ShowInventory()
@@ -58,11 +49,6 @@ namespace HomeWork_31.Base_classes
             {
                 item.ShowItemInfo();
             }
-        }
-
-        private bool CheckItem(Item item)
-        {
-            return _inventory.Contains(item);
         }
     }
 }

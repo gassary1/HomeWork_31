@@ -6,6 +6,8 @@ namespace HomeWork_31.Base_classes
 {
     class Seller
     {
+        private IMessage _simpleMessage;
+        private IMessage _alertMessage;
         private string _name;
         private int _gold;
         private List<Item> _items;
@@ -27,7 +29,7 @@ namespace HomeWork_31.Base_classes
         {
             Item salledItem;
 
-            if (TryGetProduct(currentPosition, out Item item))
+            if (TryGetProduct(currentPosition, out Item item) && player.Gold>0 && player.Gold>item.Price)
             {
                 salledItem = (Item)item.Clone();
                 salledItem.Amount = 1;
@@ -41,7 +43,13 @@ namespace HomeWork_31.Base_classes
                 {
                     _items.Remove(item);
                 }
-                item = salledItem;
+                _simpleMessage = new NormalDecorator(new SimpleMessage("Продажа прошла успешно"));
+                _simpleMessage.PrintMessage();
+            }
+            else
+            {
+                _alertMessage = new ErrorDecorator(new AlertMessage("Продажа не прошла"));
+                _alertMessage.PrintMessage();
             }
         }
 
