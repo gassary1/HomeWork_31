@@ -8,70 +8,74 @@ namespace HomeWork_31
     {
         static void Main(string[] Args)
         {
-            Player player = new Player("Player", 10);
+            bool isActive = true;
+            int itemPosition;
+            ConsoleKey userOption;
+            Person player = new Player("Player", 100);
             Saller seller = new Saller("Saller", 1111);
 
+            while (isActive)
+            {
+                player.ShowItems();
+                Console.WriteLine();
+                PrintMenu();
+                Console.Write("\nВыберите действие: ");
+                userOption = Console.ReadKey().Key;
+
+                Console.Clear();
+                if (userOption == ConsoleKey.D1)
+                {
+                    seller.ShowItems();
+                }
+                else if (userOption == ConsoleKey.D2)
+                {
+                    seller.ShowItems();
+
+                    Console.Write("\nВыберите номер предмета: ");
+                    itemPosition = GetNumber();
+
+                    seller.SellItemToPlayer((Player)player, itemPosition);
+                }
+                else if (userOption == ConsoleKey.D3)
+                {
+                    isActive = false;
+                }
+                else
+                {
+                    Console.WriteLine("Неизвестный выбор");
+                }
+            }
+
             seller.ShowItems();
             Console.WriteLine();
-            player.ShowInventory();
+            player.ShowItems();
+            
+        }
 
+        static void PrintMenu()
+        {
+            Console.WriteLine("1 - Посмотреть ассортимент товаров\n2 - Купить предмет\n3 - Выход");
+        }
 
-            seller.SellItemToPlayer(player, 3);
+        static int GetNumber()
+        {
+            bool isActive = true;
+            int result = 0;
 
-            Console.WriteLine();
-            seller.ShowItems();
-            Console.WriteLine();
-            player.ShowInventory();
-            Console.WriteLine();
+            while (isActive)
+            {
+                string userInput = Console.ReadLine();
 
-            seller.SellItemToPlayer(player, 3);
-
-            Console.WriteLine();
-            seller.ShowItems();
-            Console.WriteLine();
-            player.ShowInventory();
-            Console.WriteLine();
-
-            seller.SellItemToPlayer(player, 3);
-
-            Console.WriteLine();
-            seller.ShowItems();
-            Console.WriteLine();
-            player.ShowInventory();
-            Console.WriteLine();
-
-            seller.SellItemToPlayer(player, 3);
-
-            Console.WriteLine();
-            seller.ShowItems();
-            Console.WriteLine();
-            player.ShowInventory();
-            Console.WriteLine();
-
-            seller.SellItemToPlayer(player, 3);
-
-            Console.WriteLine();
-            seller.ShowItems();
-            Console.WriteLine();
-            player.ShowInventory();
-            Console.WriteLine();
-
-            seller.SellItemToPlayer(player, 1);
-
-            Console.WriteLine();
-            seller.ShowItems();
-            Console.WriteLine();
-            player.ShowInventory();
-            Console.WriteLine();
-
-            seller.SellItemToPlayer(player, 1);
-
-            Console.WriteLine();
-            seller.ShowItems();
-            Console.WriteLine();
-            player.ShowInventory();
-            Console.WriteLine();
-
+                if (int.TryParse(userInput, out result))
+                {
+                    isActive = false;
+                }
+                else
+                {
+                    Console.WriteLine("Ошибка ввода");
+                }
+            }
+            return result;
         }
     }
 }

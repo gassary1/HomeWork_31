@@ -5,19 +5,10 @@ using HomeWork_31.Message_decorator;
 
 namespace HomeWork_31.Base_classes
 {
-    class Player
+    class Player:Person
     {
-        private string _name;
-        private int _gold;
-        private List<Item> _inventory;
-
-        public string Name => _name;
-        public int Gold => _gold;
-
-        public Player(string name, int gold)
+        public Player(string name, int gold) : base(name, gold)
         {
-            _name = name;
-            _gold = gold;
             _inventory = new List<Item>();
         }
 
@@ -41,12 +32,15 @@ namespace HomeWork_31.Base_classes
             }
         }
 
-        public void ShowInventory()
+        public override void ShowItems()
         {
+            int position = 1;
+
             Console.WriteLine($"Инвентарь игрока {Name}. Баланс - {Gold}");
 
             foreach (var item in _inventory)
             {
+                Console.Write($"{position++})");
                 item.ShowItemInfo();
             }
         }

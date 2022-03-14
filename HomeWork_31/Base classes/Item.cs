@@ -24,7 +24,7 @@ namespace HomeWork_31.Base_classes
 
         public void ShowItemInfo()
         {
-            Console.WriteLine($"{Name,10} {Amount,5} {Price,5}");
+            Console.WriteLine($"Название: {Name, 15} Количество: {Amount, 2} Цена: {Price,2} золотых");
         }
 
         public object Clone()

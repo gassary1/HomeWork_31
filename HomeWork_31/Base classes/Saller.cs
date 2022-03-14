@@ -4,45 +4,40 @@ using HomeWork_31.Message_decorator;
 
 namespace HomeWork_31.Base_classes
 {
-    class Saller
+    class Saller:Person
     {
         private IMessage _simpleMessage;
         private IMessage _alertMessage;
-        private string _name;
-        private int _gold;
-        private List<Item> _items;
 
-        public string Name => _name;
-        public int Gold => _gold;
-
-        public Saller(string name, int gold)
+        public Saller(string name, int gold):base(name,gold)
         {
-            _name = name;
-            _gold = gold;
-            _items = new List<Item>();
-            _items.Add(new Item("11", 2, 10));
-            _items.Add(new Item("14", 2, 15));
-            _items.Add(new Item("16", 5, 4));
+            _inventory = new List<Item>();
+            _inventory.Add(new Item("Клинок", 2, 40));
+            _inventory.Add(new Item("Лечебное зелье", 5, 10));
+            _inventory.Add(new Item("Зелье маны", 5, 18));
+            _inventory.Add(new Item("Амулет", 4, 20));
 
         }
         public void SellItemToPlayer(Player player, int currentPosition)
         {
+            int itemPosition = currentPosition - 1;
             Item salledItem;
 
-            if (TryGetProduct(currentPosition, out Item item) && player.Gold>0 && player.Gold>item.Price)
+            if (TryGetProduct(currentPosition, out Item item) && player.Gold > 0 && player.Gold > item.Price)
             {
                 salledItem = (Item)item.Clone();
                 salledItem.Amount = 1;
 
                 _gold += salledItem.Price;
-                _items[currentPosition-1].Amount--;
+                _inventory[itemPosition].Amount--;
 
                 player.AddItem(salledItem);
 
-                if (_items[currentPosition-1].Amount==0)
+                if (_inventory[itemPosition].Amount==0)
                 {
-                    _items.Remove(item);
+                    _inventory.Remove(item);
                 }
+
                 _simpleMessage = new NormalDecorator(new SimpleMessage("Продажа прошла успешно"));
                 _simpleMessage.PrintMessage();
             }
@@ -53,12 +48,15 @@ namespace HomeWork_31.Base_classes
             }
         }
 
-        public void ShowItems()
+        public override void ShowItems()
         {
+            int position = 1;
+
             Console.WriteLine($"Лавка продавца {Name}. Баланс - {Gold}");
 
-            foreach (var item in _items)
+            foreach (var item in _inventory)
             {
+                Console.Write($"{position++})");
                 item.ShowItemInfo();
             }
         }
@@ -68,12 +66,12 @@ namespace HomeWork_31.Base_classes
             int itemPosition = currentPosition - 1;
             item = null;
 
-            if (_items[itemPosition] == null)
+            if (currentPosition > _inventory.Count || _inventory[itemPosition] == null)
             {
                 return false;
             }
 
-            item = _items[itemPosition];
+            item = _inventory[itemPosition];
             return true;
         }
     }
