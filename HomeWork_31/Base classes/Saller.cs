@@ -4,7 +4,7 @@ using HomeWork_31.Message_decorator;
 
 namespace HomeWork_31.Base_classes
 {
-    class Seller
+    class Saller
     {
         private IMessage _simpleMessage;
         private IMessage _alertMessage;
@@ -15,7 +15,7 @@ namespace HomeWork_31.Base_classes
         public string Name => _name;
         public int Gold => _gold;
 
-        public Seller(string name, int gold)
+        public Saller(string name, int gold)
         {
             _name = name;
             _gold = gold;
