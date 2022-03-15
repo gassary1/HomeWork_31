@@ -6,7 +6,7 @@ namespace HomeWork_31.Base_classes
     {
         private protected string _name;
         private protected int _gold;
-        private protected List<Item> _inventory;
+        private protected List<Stack> _inventory;
 
         public string Name => _name;
         public int Gold { get { return _gold; } protected set { _gold = value; } }

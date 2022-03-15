@@ -11,31 +11,27 @@ namespace HomeWork_31.Base_classes
 
         public Seller(string name, int gold) : base(name, gold)
         {
-            _inventory = new List<Item>();
-            _inventory.Add(new Item("Клинок", 2, 40));
-            _inventory.Add(new Item("Лечебное зелье", 5, 10));
-            _inventory.Add(new Item("Зелье маны", 5, 18));
-            _inventory.Add(new Item("Амулет", 4, 20));
-
+            _inventory = new List<Stack>();
+            _inventory.Add(new Stack(new Item("Клинок", 40), 2));
+            _inventory.Add(new Stack(new Item("Лечебное зелье", 10), 5));
+            _inventory.Add(new Stack(new Item("Зелье маны", 18), 5));
+            _inventory.Add(new Stack(new Item("Амулет", 20), 4));
         }
+
         public override void SellItemToPlayer(Player player, int currentPosition)
         {
             int itemPosition = currentPosition - 1;
-            Item selledItem;
 
             if (TryGetProduct(currentPosition, out Item item) && player.Gold > 0 && player.Gold > item.Price)
             {
-                selledItem = (Item)item.Clone();
-                selledItem.SetOneToItemAmount();
+                Gold += item.Price;
+                _inventory[itemPosition].DecreaseStackAmountByOne();
 
-                Gold += selledItem.Price;
-                _inventory[itemPosition].DecreaseItemAmountByOne();
-
-                player.AddItem(selledItem);
+                player.AddItem(item);
 
                 if (_inventory[itemPosition].Amount == 0)
                 {
-                    _inventory.Remove(item);
+                    _inventory.Remove(_inventory[itemPosition]);
                 }
 
                 _simpleMessage = new NormalDecorator(new SimpleMessage("Продажа прошла успешно"));
@@ -57,7 +53,7 @@ namespace HomeWork_31.Base_classes
             foreach (var item in _inventory)
             {
                 Console.Write($"{position++})");
-                item.ShowItemInfo();
+                item.ShowStackInfo();
             }
         }
 
@@ -66,12 +62,12 @@ namespace HomeWork_31.Base_classes
             int itemPosition = currentPosition - 1;
             item = null;
 
-            if (currentPosition > _inventory.Count || _inventory[itemPosition] == null)
+            if (currentPosition > _inventory.Count || _inventory[itemPosition].Item == null)
             {
                 return false;
             }
 
-            item = _inventory[itemPosition];
+            item = _inventory[itemPosition].Item;
             return true;
         }
     }

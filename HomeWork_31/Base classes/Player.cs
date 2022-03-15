@@ -9,17 +9,18 @@ namespace HomeWork_31.Base_classes
     {
         public Player(string name, int gold) : base(name, gold)
         {
-            _inventory = new List<Item>();
+            _inventory = new List<Stack>();
         }
 
         public void AddItem(Item item)
         {
-            _inventory.Add(item);
+            _inventory.Add(new Stack(item,1));
+
             Gold -= item.Price;
 
             for (int i = 1; i < _inventory.Count; i++)
             {
-                if (_inventory[i].Name == _inventory[i - 1].Name)
+                if (_inventory[i].Item.Name == _inventory[i - 1].Item.Name)
                 {
                     _inventory[i] = _inventory[i - 1];
 
@@ -41,7 +42,7 @@ namespace HomeWork_31.Base_classes
             foreach (var item in _inventory)
             {
                 Console.Write($"{position++})");
-                item.ShowItemInfo();
+                item.ShowStackInfo();
             }
         }
     }

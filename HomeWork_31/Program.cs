@@ -11,6 +11,7 @@ namespace HomeWork_31
             bool isActive = true;
             int itemPosition;
             ConsoleKey userOption;
+
             Person player = new Player("Player", 100);
             Person seller = new Seller("Saller", 1111);
 
@@ -45,10 +46,6 @@ namespace HomeWork_31
                     Console.WriteLine("Неизвестный выбор");
                 }
             }
-
-            seller.ShowItems();
-            Console.WriteLine();
-            player.ShowItems();
         }
 
         static void PrintMenu()
