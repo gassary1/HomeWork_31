@@ -12,7 +12,7 @@ namespace HomeWork_31
             int itemPosition;
             ConsoleKey userOption;
             Person player = new Player("Player", 100);
-            Saller seller = new Saller("Saller", 1111);
+            Person seller = new Seller("Saller", 1111);
 
             while (isActive)
             {
@@ -49,7 +49,6 @@ namespace HomeWork_31
             seller.ShowItems();
             Console.WriteLine();
             player.ShowItems();
-            
         }
 
         static void PrintMenu()

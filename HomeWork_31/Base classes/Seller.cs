@@ -4,12 +4,12 @@ using HomeWork_31.Message_decorator;
 
 namespace HomeWork_31.Base_classes
 {
-    class Saller:Person
+    class Seller : Person
     {
         private IMessage _simpleMessage;
         private IMessage _alertMessage;
 
-        public Saller(string name, int gold):base(name,gold)
+        public Seller(string name, int gold) : base(name, gold)
         {
             _inventory = new List<Item>();
             _inventory.Add(new Item("Клинок", 2, 40));
@@ -18,22 +18,22 @@ namespace HomeWork_31.Base_classes
             _inventory.Add(new Item("Амулет", 4, 20));
 
         }
-        public void SellItemToPlayer(Player player, int currentPosition)
+        public override void SellItemToPlayer(Player player, int currentPosition)
         {
             int itemPosition = currentPosition - 1;
-            Item salledItem;
+            Item selledItem;
 
             if (TryGetProduct(currentPosition, out Item item) && player.Gold > 0 && player.Gold > item.Price)
             {
-                salledItem = (Item)item.Clone();
-                salledItem.Amount = 1;
+                selledItem = (Item)item.Clone();
+                selledItem.SetOneToItemAmount();
 
-                _gold += salledItem.Price;
-                _inventory[itemPosition].Amount--;
+                Gold += selledItem.Price;
+                _inventory[itemPosition].DecreaseItemAmountByOne();
 
-                player.AddItem(salledItem);
+                player.AddItem(selledItem);
 
-                if (_inventory[itemPosition].Amount==0)
+                if (_inventory[itemPosition].Amount == 0)
                 {
                     _inventory.Remove(item);
                 }

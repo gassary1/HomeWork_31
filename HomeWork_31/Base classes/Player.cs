@@ -5,7 +5,7 @@ using HomeWork_31.Message_decorator;
 
 namespace HomeWork_31.Base_classes
 {
-    class Player:Person
+    class Player : Person
     {
         public Player(string name, int gold) : base(name, gold)
         {
@@ -15,7 +15,7 @@ namespace HomeWork_31.Base_classes
         public void AddItem(Item item)
         {
             _inventory.Add(item);
-            _gold -= item.Price;
+            Gold -= item.Price;
 
             for (int i = 1; i < _inventory.Count; i++)
             {
@@ -25,7 +25,7 @@ namespace HomeWork_31.Base_classes
 
                     if (_inventory[i] == _inventory[i - 1])
                     {
-                        _inventory[i].Amount += 1;
+                        _inventory[i].AddItemAmountByOne();
                         _inventory.Remove(_inventory[i - 1]);
                     }
                 }
